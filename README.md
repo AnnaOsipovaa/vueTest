@@ -7,7 +7,8 @@
 ## Для запуска
 
 ```sh
-npm i
+cd vueTest
+npm install
 npm run dev
 ```
 
