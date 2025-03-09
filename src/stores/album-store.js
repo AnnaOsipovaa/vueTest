@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 import { AlbumService } from '@/services/album-services';
 
 export const useAlbumStore = defineStore('useAlbumStore', () => {
@@ -9,14 +9,16 @@ export const useAlbumStore = defineStore('useAlbumStore', () => {
     const userAlbums = ref([]);
 
     async function getAlbums(userId) {
-        if(!error.value){
-            let list = searchAlbumInStore(userId);
-            if(list) {
-                userAlbums.value = list;
-            } else {
-                await getAlbumInStore(userId);
-                await getAlbums(userId);
-            }
+        if (error.value) {
+            return;
+        }
+
+        let list = searchAlbumInStore(userId);
+        if (list) {
+            userAlbums.value = list;
+        } else {
+            await getAlbumInStore(userId);
+            await getAlbums(userId);
         }
     }
 
@@ -37,9 +39,9 @@ export const useAlbumStore = defineStore('useAlbumStore', () => {
         return userAlbums;
     }
 
-    return { 
-        openAlbumId, 
-        userAlbums, 
-        getAlbums 
+    return {
+        openAlbumId,
+        userAlbums,
+        getAlbums
     }
 })

@@ -16,7 +16,7 @@ export class HttpUtils {
         try {
             const response = await fetch('https://json.medrocket.ru' + url, params);
 
-            if (!response.ok) {  
+            if (!response.ok) {
                 result.error = true;
                 return result
             }

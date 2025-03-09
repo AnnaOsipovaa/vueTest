@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 import { PhotoService } from '@/services/photo-services';
 
 export const usePhotoStore = defineStore('usePhotoStore', () => {
@@ -8,9 +8,9 @@ export const usePhotoStore = defineStore('usePhotoStore', () => {
     const userPhotos = ref([]);
 
     async function getPhotos(albumId) {
-        if(!error.value){
+        if (!error.value) {
             let list = searchPhotoInStore(albumId);
-            if(!list) {
+            if (!list) {
                 await getPhotoInStore(albumId);
                 await getPhotos(albumId);
             }
@@ -33,7 +33,7 @@ export const usePhotoStore = defineStore('usePhotoStore', () => {
         if (allPhotos.value.length > 0) {
             userPhotos.value = [];
             allPhotos.value.forEach((photo) => {
-                if(photo.albumId === albumId){
+                if (photo.albumId === albumId) {
                     userPhotos.value.push(photo);
                     isSearchPhotos = true;
                 }
@@ -42,8 +42,8 @@ export const usePhotoStore = defineStore('usePhotoStore', () => {
         return isSearchPhotos;
     }
 
-    return { 
-        userPhotos, 
+    return {
+        userPhotos,
         getPhotos
     }
 })

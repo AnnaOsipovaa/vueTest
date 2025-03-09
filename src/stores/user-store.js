@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 import { UserService } from '@/services/user-services';
 
 export const useUserStore = defineStore('useUserStore', () => {
@@ -9,17 +9,17 @@ export const useUserStore = defineStore('useUserStore', () => {
 
   async function getUserStore() {
     let responseUsers = await UserService.getUsers();
-    if(responseUsers.data && !responseUsers.error){
+    if (responseUsers.data && !responseUsers.error) {
       usersList.value = responseUsers.data;
-    }else{
+    } else {
       error.value = true;
     }
   }
 
-  return { 
-    openUserId, 
-    usersList, 
-    error, 
-    getUserStore 
+  return {
+    openUserId,
+    usersList,
+    error,
+    getUserStore
   }
 })
