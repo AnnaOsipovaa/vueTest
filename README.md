@@ -4,11 +4,10 @@
 
 Стек: Vue3 (Composition API) + Pinia + Vite
 
-## Project Setup
+## Для запуска
 
 ```sh
-npm install
-```
+npm i
 npm run dev
 ```
 
