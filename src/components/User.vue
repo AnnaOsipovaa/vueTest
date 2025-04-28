@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, Ref } from 'vue';
-import { useUserStore } from '@/stores/user-store';
-import { useAlbumStore } from '@/stores/album-store';
+import { useUserStore } from '../stores/user-store';
+import { useAlbumStore } from '../stores/album-store';
 import Loader from '../components/Loader.vue';
 import Album from '../components/Album.vue';
 import Error from './Error.vue';

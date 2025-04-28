@@ -1,5 +1,5 @@
-import { ResponseType } from "@/types/response.type";
-import { HttpUtils } from "@/utils/http-utils";
+import { ResponseType } from '../types/response.type';
+import { HttpUtils } from '../utils/http-utils';
 
 export class PhotoService {
     static async getPhotos(albumId: number): Promise<ResponseType> {

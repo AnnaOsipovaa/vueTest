@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useFavouritesStore } from '@/stores/favourites-store';
+import { useFavouritesStore } from './stores/favourites-store';
 
 const favouritesStore = useFavouritesStore();
 onMounted(async () => {

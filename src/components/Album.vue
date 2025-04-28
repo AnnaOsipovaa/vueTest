@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, Ref } from 'vue';
-import PhotoType from '@/types/photo.type';
-import { useAlbumStore } from '@/stores/album-store';
-import { usePhotoStore } from '@/stores/photo-store';
-import { useFavouritesStore } from '@/stores/favourites-store';
+import PhotoType from '../types/photo.type';
+import { useAlbumStore } from '../stores/album-store';
+import { usePhotoStore } from '../stores/photo-store';
+import { useFavouritesStore } from '../stores/favourites-store';
 import Loader from '../components/Loader.vue';
 import Photo from '../components/Photo.vue';
 import Error from './Error.vue';

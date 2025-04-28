@@ -1,8 +1,8 @@
 import { ref, Ref } from 'vue';
 import { defineStore } from 'pinia';
-import { PhotoService } from '@/services/photo-services';
-import { ResponseType } from '@/types/response.type';
-import { PhotoType } from '@/types/photo.type';
+import { PhotoService } from '../services/photo-services';
+import { ResponseType } from '../types/response.type';
+import { PhotoType } from '../types/photo.type';
 
 export const usePhotoStore = defineStore('usePhotoStore', () => {
     const allPhotos: Ref<PhotoType[]> = ref([]);

@@ -1,8 +1,8 @@
 import { ref, Ref } from 'vue';
 import { defineStore } from 'pinia';
-import { AlbumService } from '@/services/album-services';
-import { ResponseType } from '@/types/response.type';
-import { AlbumType } from '@/types/album.type';
+import { AlbumService } from '../services/album-services';
+import { ResponseType } from '../types/response.type';
+import { AlbumType } from '../types/album.type';
 
 export const useAlbumStore = defineStore('useAlbumStore', () => {
     const openAlbumId: Ref<number> = ref(0);

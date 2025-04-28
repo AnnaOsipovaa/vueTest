@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
-import { useFavouritesStore } from '@/stores/favourites-store';
+import { useFavouritesStore } from '../stores/favourites-store';
 
 const props = defineProps<{
     photo: object,

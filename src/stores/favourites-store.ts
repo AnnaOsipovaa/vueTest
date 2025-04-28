@@ -1,9 +1,9 @@
 import { ref, Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { PhotoService } from '../services/photo-services';
-import { FavouritesPhotosType } from '@/types/favourites-photos.type';
-import { PhotoType } from '@/types/photo.type';
-import { ResponseType } from '@/types/response.type';
+import { FavouritesPhotosType } from '../types/favourites-photos.type';
+import { PhotoType } from '../types/photo.type';
+import { ResponseType } from '../types/response.type';
 
 export const useFavouritesStore = defineStore('useFavouritesStore', () => {
     const favouritesListKey: string = 'favouritesList';

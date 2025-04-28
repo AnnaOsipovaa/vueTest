@@ -1,8 +1,8 @@
 import { ref, Ref } from 'vue';
 import { defineStore } from 'pinia';
-import { UserService } from '@/services/user-services';
-import { UserType } from '@/types/user.type';
-import { ResponseType } from '@/types/response.type';
+import { UserService } from '../services/user-services';
+import { UserType } from '../types/user.type';
+import { ResponseType } from '../types/response.type';
 
 export const useUserStore = defineStore('useUserStore', () => {
   const openUserId: Ref<number | null> = ref(null);

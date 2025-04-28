@@ -1,7 +1,7 @@
-import { ResponseType } from "@/types/response.type";
+import { ResponseType } from "../types/response.type";
 
 export class HttpUtils {
-    static async request(url: string, method: string = 'GET', body: object = null): Promise<ResponseType> {
+    static async request(url: string, method: string = 'GET', body: object | null = null): Promise<ResponseType> {
         const result: ResponseType = {
             error: false,
             data: null

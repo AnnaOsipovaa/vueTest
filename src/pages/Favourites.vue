@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref, watch, Ref } from 'vue';
-import { useFavouritesStore } from '@/stores/favourites-store';
+import { useFavouritesStore } from '../stores/favourites-store';
 import Loader from '../components/Loader.vue';
 import Photo from '../components/Photo.vue';
-import Error from '@/components/Error.vue';
+import Error from '../components/Error.vue';
 
 const favouritesStore = useFavouritesStore();
 const loaderOn: Ref<boolean> = ref(false);

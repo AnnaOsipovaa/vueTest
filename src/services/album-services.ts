@@ -1,5 +1,5 @@
-import { ResponseType } from "@/types/response.type";
-import { HttpUtils } from "@/utils/http-utils";
+import { ResponseType } from '../types/response.type';
+import { HttpUtils } from '../utils/http-utils';
 
 export class AlbumService {
     static async getAlbums(userId: number): Promise<ResponseType> {

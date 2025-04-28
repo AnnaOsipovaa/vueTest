@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref, Ref } from 'vue';
-import { useUserStore } from '@/stores/user-store';
+import { useUserStore } from '../stores/user-store';
 import Loader from '../components/Loader.vue';
 import User from '../components/User.vue';
-import Error from '@/components/Error.vue';
+import Error from '../components/Error.vue';
 
 const userStore = useUserStore();
 const loaderOn: Ref<boolean> = ref(false);
