@@ -1,5 +1,5 @@
-<script setup>
-import { computed, ref } from 'vue';
+<script setup lang="ts">
+import { computed, ref, Ref } from 'vue';
 import { useUserStore } from '@/stores/user-store';
 import { useAlbumStore } from '@/stores/album-store';
 import Loader from '../components/Loader.vue';
@@ -8,18 +8,18 @@ import Error from './Error.vue';
 
 const userStore = useUserStore();
 const albumStore = useAlbumStore();
-const loaderOn = ref(false);
+const loaderOn: Ref<boolean> = ref(false);
 
-const props = defineProps({
-    id: Number,
-    name: String
-});
+const props = defineProps<{
+    id: number,
+    name: string
+}>();
 
-const isOpenUser = computed(() => {
+const isOpenUser = computed<boolean>(() => {
     return userStore.openUserId === props.id;
 })
 
-async function getAlbums(){
+async function getAlbums(): Promise<void>{
     if(!isOpenUser.value){
         userStore.openUserId = props.id;
         loaderOn.value = true;

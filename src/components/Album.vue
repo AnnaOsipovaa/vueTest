@@ -1,5 +1,6 @@
-<script setup>
-import { computed, ref } from 'vue';
+<script setup lang="ts">
+import { computed, ref, Ref } from 'vue';
+import PhotoType from '@/types/photo.type';
 import { useAlbumStore } from '@/stores/album-store';
 import { usePhotoStore } from '@/stores/photo-store';
 import { useFavouritesStore } from '@/stores/favourites-store';
@@ -7,21 +8,21 @@ import Loader from '../components/Loader.vue';
 import Photo from '../components/Photo.vue';
 import Error from './Error.vue';
 
-const props = defineProps({
-    id: Number,
-    title: String
-});
+const props = defineProps<{
+    id: number,
+    title: string
+}>();
 
 const albumStore = useAlbumStore();
 const photoStore = usePhotoStore();
 const favouritesStore = useFavouritesStore();
-const loaderOn = ref(false);
+const loaderOn: Ref<boolean> = ref(false);
 
-const isOpenAlbum = computed(() => {
+const isOpenAlbum = computed<boolean>(() => {
     return albumStore.openAlbumId === props.id;
 })
 
-async function getPhotos(){
+async function getPhotos(): Promise<void>{
     if(!isOpenAlbum.value){
         albumStore.openAlbumId = props.id;
         loaderOn.value = true;
@@ -34,7 +35,7 @@ async function getPhotos(){
     }
 }
 
-function isFavourites(photo){
+function isFavourites(photo: PhotoType): boolean{
     return favouritesStore.searchPhotosInFavorites(photo.albumId, photo.id) > -1 ? true : false;
 }
 </script>

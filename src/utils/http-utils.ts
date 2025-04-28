@@ -1,11 +1,13 @@
+import { ResponseType } from "@/types/response.type";
+
 export class HttpUtils {
-    static async request(url, method = 'GET', body = null) {
-        const result = {
+    static async request(url: string, method: string = 'GET', body: object = null): Promise<ResponseType> {
+        const result: ResponseType = {
             error: false,
             data: null
         }
 
-        const params = {
+        const params: any = {
             method: method
         }
 
@@ -14,7 +16,7 @@ export class HttpUtils {
         }
 
         try {
-            const response = await fetch('https://json.medrocket.ru' + url, params);
+            const response: Response = await fetch('https://json.medrocket.ru' + url, params);
 
             if (!response.ok) {
                 result.error = true;

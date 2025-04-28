@@ -1,9 +1,9 @@
-<script setup>
-    defineProps({
-        title: String,
-        text: String,
-        image: String
-    });
+<script setup lang="ts">
+    defineProps<{
+        title: string,
+        text: string,
+        image: string
+    }>();
 </script>
 
 <template>

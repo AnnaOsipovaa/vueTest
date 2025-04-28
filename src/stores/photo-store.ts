@@ -1,15 +1,17 @@
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { PhotoService } from '@/services/photo-services';
+import { ResponseType } from '@/types/response.type';
+import { PhotoType } from '@/types/photo.type';
 
 export const usePhotoStore = defineStore('usePhotoStore', () => {
-    const allPhotos = ref([]);
-    const error = ref(false);
-    const userPhotos = ref([]);
+    const allPhotos: Ref<PhotoType[]> = ref([]);
+    const error: Ref<boolean> = ref(false);
+    const userPhotos: Ref<PhotoType[]> = ref([]);
 
-    async function getPhotos(albumId) {
+    async function getPhotos(albumId: number): Promise<void> {
         if (!error.value) {
-            let list = searchPhotoInStore(albumId);
+            const list: boolean = searchPhotoInStore(albumId);
             if (!list) {
                 await getPhotoInStore(albumId);
                 await getPhotos(albumId);
@@ -17,10 +19,10 @@ export const usePhotoStore = defineStore('usePhotoStore', () => {
         }
     }
 
-    async function getPhotoInStore(albumId) {
-        let responsePhotos = await PhotoService.getPhotos(albumId);
+    async function getPhotoInStore(albumId: number): Promise<void> {
+        const responsePhotos: ResponseType = await PhotoService.getPhotos(albumId);
         if (responsePhotos.data && !responsePhotos.error) {
-            responsePhotos.data.forEach(photo => {
+            responsePhotos.data.forEach((photo: PhotoType) => {
                 allPhotos.value.push(photo);
             });
         } else {
@@ -28,11 +30,11 @@ export const usePhotoStore = defineStore('usePhotoStore', () => {
         }
     }
 
-    function searchPhotoInStore(albumId) {
-        let isSearchPhotos = false;
+    function searchPhotoInStore(albumId: number): boolean {
+        let isSearchPhotos: boolean = false;
         if (allPhotos.value.length > 0) {
             userPhotos.value = [];
-            allPhotos.value.forEach((photo) => {
+            allPhotos.value.forEach((photo: PhotoType) => {
                 if (photo.albumId === albumId) {
                     userPhotos.value.push(photo);
                     isSearchPhotos = true;

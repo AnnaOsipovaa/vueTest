@@ -1,19 +1,21 @@
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { AlbumService } from '@/services/album-services';
+import { ResponseType } from '@/types/response.type';
+import { AlbumType } from '@/types/album.type';
 
 export const useAlbumStore = defineStore('useAlbumStore', () => {
-    const openAlbumId = ref(0);
-    const allAlbums = ref({});
-    const error = ref(false);
-    const userAlbums = ref([]);
+    const openAlbumId: Ref<number> = ref(0);
+    const allAlbums: Ref<object> = ref({});
+    const error: Ref<boolean> = ref(false);
+    const userAlbums: Ref<AlbumType[]> = ref([]);
 
-    async function getAlbums(userId) {
+    async function getAlbums(userId: number): Promise<void> {
         if (error.value) {
             return;
         }
 
-        let list = searchAlbumInStore(userId);
+        const list: AlbumType[] | null = searchAlbumInStore(userId);
         if (list) {
             userAlbums.value = list;
         } else {
@@ -22,8 +24,8 @@ export const useAlbumStore = defineStore('useAlbumStore', () => {
         }
     }
 
-    async function getAlbumInStore(userId) {
-        let responseAlbums = await AlbumService.getAlbums(userId);
+    async function getAlbumInStore(userId: number): Promise<void> {
+        const responseAlbums: ResponseType = await AlbumService.getAlbums(userId);
         if (responseAlbums.data && !responseAlbums.error) {
             allAlbums.value[userId] = responseAlbums.data;
         } else {
@@ -31,8 +33,8 @@ export const useAlbumStore = defineStore('useAlbumStore', () => {
         }
     }
 
-    function searchAlbumInStore(userId) {
-        let userAlbums = null;
+    function searchAlbumInStore(userId: number): AlbumType[] | null {
+        let userAlbums: AlbumType[] | null = null;
         if (allAlbums.value && allAlbums.value[userId]) {
             userAlbums = allAlbums.value[userId];
         }

@@ -1,20 +1,20 @@
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+import { ref, Ref } from 'vue';
 import { useFavouritesStore } from '@/stores/favourites-store';
 
-const props = defineProps({
-    photo: Object,
-    isFavourite: Boolean,
-    showTitle: Boolean
-});
+const props = defineProps<{
+    photo: object,
+    isFavourite: boolean,
+    showTitle: boolean
+}>();
 
 const favouritesStore = useFavouritesStore();
-const modalOpen = ref(false);
-const title = ref(props.photo.title);
-const thumbnailUrl = ref(props.photo.thumbnailUrl);
-const url = ref(props.photo.url);
+const modalOpen: Ref<boolean> = ref(false);
+const title: Ref<string> = ref(props.photo.title);
+const thumbnailUrl: Ref<string> = ref(props.photo.thumbnailUrl);
+const url: Ref<string> = ref(props.photo.url);
 
-function addFavourites(){
+function addFavourites(): void{
     if(!props.isFavourite){
         favouritesStore.addToFavourites(props.photo.albumId, props.photo.id);
     }else{
@@ -22,11 +22,11 @@ function addFavourites(){
     }
 }
 
-function openPhoto(){
+function openPhoto(): void{
     modalOpen.value = true;
 };
 
-function closeModal(){
+function closeModal(): void{
   modalOpen.value = false;
 };
 
