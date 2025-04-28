@@ -58,70 +58,82 @@ function closeModal(){
     </teleport>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../assets/styles/variables' as *;
+
 .image{
     cursor: pointer;
     position: relative;
+
+    &:hover{
+        .image__pop-up-title{
+            display: block;
+        }
+    }
+
+    .image__action{
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 1;
+    }
+
+    .image__pop-up-title{
+        display: none;
+        position: absolute;
+        bottom: -22px;
+        left: 63px;
+        background: $background-modal-color;
+        color: $main-color;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-family: 'Roboto-Regular', sans-serif;
+        border-radius: 4px;
+        z-index: 1;
+        width: fit-content;
+    }
+
+    .image__img{
+        max-width: 100%;
+    }
+
+    .image__title{
+        color: $title-photo-color;
+        font-size: 14px;
+        font-family: 'Roboto-Regular', sans-serif;
+    }
 }
-.image__action{
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 1;
-}
-.image__pop-up-title{
-    display: none;
-    position: absolute;
-    bottom: -22px;
-    left: 63px;
-    background: rgba(0, 0, 0, 0.69);
-    color: var(--main-color);
-    padding: 4px 8px;
-    font-size: 12px;
-    font-family: 'Roboto-Regular', sans-serif;
-    border-radius: 4px;
-    box-sizing: border-box;
-    z-index: 1;
-    width: fit-content;
-}
-.image:hover .image__pop-up-title{
-    display: block;
-}
-.image__title{
-    color: var(--title-photo-color);
-    font-size: 14px;
-    font-family: 'Roboto-Regular', sans-serif;
-}
-.image__img{
-    max-width: 100%;
-}
+
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-.modal__content {
-  position: relative;
-  text-align: center;
-}
-.modal__image {
-  max-width: 90%;
-  max-height: 90%;
-}
-.modal__close {
-  position: absolute;
-  top: 32px;
-  right: 40px;
-  background-color: transparent;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $background-modal-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal__close {
+        position: absolute;
+        top: 32px;
+        right: 40px;
+        background-color: transparent;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .modal__content {
+        position: relative;
+        text-align: center;
+
+        .modal__image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    }
 }
 </style>

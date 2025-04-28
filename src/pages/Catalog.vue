@@ -37,7 +37,7 @@ onMounted(async () => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .users{
     padding-top: 16px;
 }

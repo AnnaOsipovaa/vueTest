@@ -45,7 +45,7 @@ onMounted(()=>{
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .favourites{
    padding: 56px 0px; 
    max-width: 534px;

@@ -64,7 +64,7 @@ async function getAlbums(){
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .list__item-info-user{
     font-size: 22px;
     font-family: 'Roboto-Medium', sans-serif;

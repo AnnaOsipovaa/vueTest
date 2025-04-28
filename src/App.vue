@@ -19,28 +19,31 @@ onMounted(async () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use './assets/styles/variables' as *;
+
 .navbar{
   display: flex;
   padding-top: 64px;
-}
-.navbar__item{
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  background: var(--main-color);
-  padding: 16px;
-  border-radius: 16px;
-  font-size: 18px;
-  cursor: pointer;
-  font-family: 'Roboto-Regular', sans-serif;
-  font-weight: 400;
-  text-decoration: none;
-  color: black;
-}
-.router-link-active{
-  background: var(--hover-background-color);
-  color: var(--hover-text-color);
+
+  .navbar__item{
+    width: 100%;
+    text-align: center;
+    background: $main-color;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: 'Roboto-Regular', sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+    color: $text-color;
+
+    &.router-link-active{
+      background: $hover-background-color;
+      color: $hover-text-color;
+    }
+  }
 }
 .content{
   padding-bottom: 126px;

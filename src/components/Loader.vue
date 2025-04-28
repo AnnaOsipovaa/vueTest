@@ -6,18 +6,17 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss"> 
+@use '../assets/styles/mixins' as *;
+
 .loader-fon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
     padding: 61px;
-}
-.loader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 48px;
-    height: 48px;
+
+    .loader{
+        @include flex-center;
+        width: 48px;
+        height: 48px;
+    }
 }
 </style>
