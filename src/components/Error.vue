@@ -9,7 +9,7 @@
 <template>
     <div class="error">
         <div class="error__image">
-            <img class="error__image-img image" :src="'/img/'+ image" alt="loading">
+            <img class="error__image-img image" :src="'/img/'+ image">
         </div>
         <div class="error__info">
             <div class="error__info-text_m">{{ title }}</div>

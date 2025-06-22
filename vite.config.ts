@@ -8,5 +8,8 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-  ]
+  ],
+  test: {
+    environment: 'jsdom'
+  }
 })
