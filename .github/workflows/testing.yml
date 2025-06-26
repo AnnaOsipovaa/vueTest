@@ -13,6 +13,7 @@ jobs:
         run: npm run test
   build:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Get the repository code
         uses: actions/checkout@v4
