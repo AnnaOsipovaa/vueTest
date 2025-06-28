@@ -1,12 +1,16 @@
 name: Test App
 on: push
 jobs:
-
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Get the repository code
         uses: actions/checkout@v4
+      - name: Cache dependecies
+        uses: actions/cache@v4
+        with:
+            path: ~/.npm
+            key: node-modules-${{ hachFiles('**/package-lock.json') }}
       - name: Install dependecies
         run: npm ci
       - name: Test
@@ -17,9 +21,14 @@ jobs:
     steps:
       - name: Get the repository code
         uses: actions/checkout@v4
+      - name: Cache dependecies
+        uses: actions/cache@v4
+        with:
+            path: ~/.npm
+            key: node-modules-${{ hachFiles('**/package-lock.json') }}
       - name: Install dependecies
         run: npm ci
       - name: Build
         run: npm run build
       - name: Deploy
-        run: echo '1'
+        run: echo "${{ github }}"
