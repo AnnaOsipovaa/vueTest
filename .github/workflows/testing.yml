@@ -38,5 +38,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Deploy
-        run: echo "${{ github }}"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: 'dist'
+          name: 'build-files'
