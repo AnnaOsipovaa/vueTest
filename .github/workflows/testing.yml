@@ -16,19 +16,15 @@ jobs:
       - name: Test
         run: npm run test
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     needs: test
-    strategy:
-      matrix:  
-        node-version: [20]
-        os: [ubuntu-latest]
     steps:
       - name: Get the repository code
         uses: actions/checkout@v4
-      - name: Instal nodeJS
+      - name: Install nodeJS
         uses: actions/setup-node@v4
         with: 
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
       - name: Cache dependecies
         uses: actions/cache@v4
         with:
