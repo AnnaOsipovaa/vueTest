@@ -1,0 +1,25 @@
+name: Test App
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the repository code
+        uses: actions/checkout@v4
+      - name: Cache dependecies
+        uses: actions/cache@v4
+        with:
+            path: ~/.npm
+            key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependecies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Deploying the site
+        uses: easingthemes/ssh-deploy@main
+        with: 
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          SOURCE: "dist/"
+          TARGET: ${{ secrets.SSH_PATH }}
