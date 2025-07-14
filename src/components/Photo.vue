@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 import { useFavouritesStore } from '../stores/favourites-store';
+import { PhotoType } from '../types/photo.type';
 
 const props = defineProps<{
-    photo: object,
+    photo: PhotoType,
     isFavourite: boolean,
     showTitle: boolean
+}>();
+
+defineEmits<{
+    'showPhotoTitle': [Event: MouseEvent, photoTitle: string],
+    'hidePhotoTitle': []
 }>();
 
 const favouritesStore = useFavouritesStore();
@@ -29,11 +35,10 @@ function openPhoto(): void{
 function closeModal(): void{
   modalOpen.value = false;
 };
-
 </script>
 
 <template>
-    <div class="image" @click="openPhoto">
+    <div class="image" @click="openPhoto" @mousemove="$emit('showPhotoTitle', $event, props.photo.title)" @mouseleave="$emit('hidePhotoTitle')">
         <div class="image__action" @click.stop="addFavourites">  
             <div v-if="!isFavourite" class="image__action-item">  
                 <img src="/img/star_empty.png" alt="добавить в избранное">
@@ -43,7 +48,7 @@ function closeModal(): void{
             </div>
         </div>
         <img class="image__img" :src="thumbnailUrl" :alt="title">
-        <div :class="{ 'image__title' : showTitle , 'image__pop-up-title' : !showTitle }">{{ title }}</div>
+        <div v-if="showTitle" class="image__title">{{ title }}</div>
     </div>
 
     <teleport to="body">
@@ -65,32 +70,11 @@ function closeModal(): void{
     cursor: pointer;
     position: relative;
 
-    &:hover{
-        .image__pop-up-title{
-            display: block;
-        }
-    }
-
     .image__action{
         position: absolute;
         top: 8px;
         right: 8px;
         z-index: 1;
-    }
-
-    .image__pop-up-title{
-        display: none;
-        position: absolute;
-        bottom: -22px;
-        left: 63px;
-        background: $background-modal-color;
-        color: $main-color;
-        padding: 4px 8px;
-        font-size: 12px;
-        font-family: 'Roboto-Regular', sans-serif;
-        border-radius: 4px;
-        z-index: 1;
-        width: fit-content;
     }
 
     .image__img{

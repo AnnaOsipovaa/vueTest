@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, Ref } from 'vue';
-import PhotoType from '../types/photo.type';
+import { PhotoType } from '../types/photo.type';
 import { useAlbumStore } from '../stores/album-store';
 import { usePhotoStore } from '../stores/photo-store';
 import { useFavouritesStore } from '../stores/favourites-store';
@@ -17,7 +17,11 @@ const albumStore = useAlbumStore();
 const photoStore = usePhotoStore();
 const favouritesStore = useFavouritesStore();
 const loaderOn: Ref<boolean> = ref(false);
-
+const x: Ref<string> = ref('0px');
+const y: Ref<string> = ref('0px');
+const titlePhoto: Ref<string> = ref('');
+const showTitlePhotoFlag: Ref<boolean> = ref(false);
+    
 const isOpenAlbum = computed<boolean>(() => {
     return albumStore.openAlbumId === props.id;
 })
@@ -37,6 +41,18 @@ async function getPhotos(): Promise<void>{
 
 function isFavourites(photo: PhotoType): boolean{
     return favouritesStore.searchPhotosInFavorites(photo.albumId, photo.id) > -1 ? true : false;
+}
+
+function showPhotoTitle(event: MouseEvent, photoTitle: string){
+    const userCursore: MouseEvent = event;
+    x.value = userCursore.clientX - 40 + 'px';
+    y.value = userCursore.clientY + 30 + 'px';
+    titlePhoto.value = photoTitle;
+    showTitlePhotoFlag.value = true;
+}
+
+function hidePhotoTitle(){
+    showTitlePhotoFlag.value = false;
 }
 </script>
 
@@ -61,18 +77,41 @@ function isFavourites(photo: PhotoType): boolean{
         ></Error>
         <div v-else class="photo-list">
             <Photo v-for="photo in photoStore.userPhotos"
+            @showPhotoTitle="showPhotoTitle"
+            @hidePhotoTitle="hidePhotoTitle"
             :photo="photo"
             :isFavourite = isFavourites(photo)
             :showTitle="false"
             ></Photo>
+            <div class='image__pop-up-title' :class="{ 'activ' : !showTitlePhotoFlag }">{{ titlePhoto }}</div>
         </div>
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../assets/styles/variables' as *;
 .list__item-info-album{
     font-size: 18px;
     font-family: 'Roboto-Regular', sans-serif;
+}
+.image__pop-up-title{
+    position: fixed;
+    background: $background-modal-color;
+    color: $main-color;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: 'Roboto-Regular', sans-serif;
+    border-radius: 4px;
+    z-index: 1;
+    max-width: 180px;
+    top: v-bind(y);
+    left: v-bind(x);
+    opacity: 1;
+    transition: opacity 0.3s;
+
+    &.activ{
+        opacity: 0;
+    }
 }
 @media (max-width: 560px) {
     .list__item-info-album{
